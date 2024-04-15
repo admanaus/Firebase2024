@@ -9,6 +9,10 @@ import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from "@angular/material/input";
+import {MatCardModule} from '@angular/material/card';
+
 
 @NgModule({
   declarations: [
@@ -23,6 +27,9 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
     AngularFireModule.initializeApp(environment.firebase), // <-- add this
     AngularFirestoreModule, 
     FlexLayoutModule,
+    FormsModule,
+    MatInputModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

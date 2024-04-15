@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
 import { Observable } from 'rxjs';
 import { Company } from '../../models/company';
+import { CompanyService } from '../company.service';
 
 @Component({
   selector: 'app-company-edit',
@@ -10,12 +10,19 @@ import { Company } from '../../models/company';
 })
 export class CompanyEditComponent implements OnInit {
 
-  company$: Observable<Company | undefined>;
+  company$: Observable<Company>;
 
-  constructor(private db: AngularFirestore) {
-    this.company$ = this.db.doc<Company>('companies/company').valueChanges();
+  constructor(private companyService: CompanyService) {
+    this.company$ = this.companyService.getCompanyObservable();
   }
 
   ngOnInit() {}
+
+  editCompany(company: Company) {
+    this.companyService.editCompany({phone: '123-456-7890'});
+  }
+  saveCompany(company: Company) {
+    this.companyService.saveCompany(company);
+  }
 
 }
