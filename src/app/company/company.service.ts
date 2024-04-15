@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Company } from '../models/company';
-import { Observable } from 'rxjs';
+import { Observable, catchError, from, of } from 'rxjs';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 
 @Injectable({
@@ -18,12 +18,29 @@ export class CompanyService {
     return this.companyRef.valueChanges();
   }
 
-  editCompany(company: any) {
-    this.companyRef.update(company);
+  saveCompany(company: Company) {
+    // this.companyRef.set(company)
+    //   .then(_ => console.log('Success on set'))
+    //   .catch(error => console.log('set', error));
+    from(this.companyRef.set(company))
+      .pipe(
+        catchError(error => {
+          console.log('set', error);
+          return of('Error');
+        })
+      );
   }
 
-  saveCompany(company: Company) {
-    this.companyRef.set(company);
+  editCompany(company: any) {
+    this.companyRef.update(company)
+      .then(_ => console.log('Success on update'))
+      .catch(error => console.log('update', error));
+  }
+
+  deleteCompany() {
+    this.companyRef.delete()
+      .then(_ => console.log('Success on remove'))
+      .catch(error => console.log('remove', error));
   }
 
 }
