@@ -31,17 +31,19 @@ export class CompanyService {
       );
   }
 
-  getCompanyObservable(): Observable<Company | any> {
-    return this.companyRef.valueChanges();
+  getCompanyObservable(id: string | null): Observable<Company | undefined> {
+    return this.db.doc<Company>(`companies/${id}`).valueChanges();
   }
 
   saveCompany(company: Company) {
+    console.log('company', company);
     this.companiesRef.add(company)
       .then(_ => console.log('success on add'))
       .catch(error => console.log('add', error));
   }
 
   editCompany(company: Company) {
+    console.log('company', company);
     this.companiesRef.doc(company.id).update(company)
       .then(_ => console.log('Success on update'))
       .catch(error => console.log('update', error));
