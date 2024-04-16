@@ -12,12 +12,17 @@ import { CompanyEditComponent } from './company/company-edit/company-edit.compon
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import {MatCardModule} from '@angular/material/card';
+import { CompanyListComponent } from './company/company-list/company-list.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    CompanyListComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +35,8 @@ import {MatCardModule} from '@angular/material/card';
     FormsModule,
     MatInputModule,
     MatCardModule,
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
