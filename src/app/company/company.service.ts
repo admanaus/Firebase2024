@@ -36,20 +36,13 @@ export class CompanyService {
   }
 
   saveCompany(company: Company) {
-    // this.companyRef.set(company)
-    //   .then(_ => console.log('Success on set'))
-    //   .catch(error => console.log('set', error));
-    from(this.companyRef.set(company))
-      .pipe(
-        catchError(error => {
-          console.log('set', error);
-          return of('Error');
-        })
-      );
+    this.companiesRef.add(company)
+      .then(_ => console.log('success on add'))
+      .catch(error => console.log('add', error));
   }
 
-  editCompany(company: any) {
-    this.companyRef.update(company)
+  editCompany(company: Company) {
+    this.companiesRef.doc(company.id).update(company)
       .then(_ => console.log('Success on update'))
       .catch(error => console.log('update', error));
   }
