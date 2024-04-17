@@ -38,14 +38,14 @@ export class ContactEditComponent implements OnInit {
       name: contact.name,
       phone: '123-456-7890',
       id: this.id,
-      companyKey: contact.companyKey
+      companyId: contact.companyId
     }).then(_ => this.router.navigate(['/contact/all']));
   }
 
   saveContact(contact: Contact) {
     this.contactService.saveContact({
       name: contact.name,
-      companyKey: contact.companyKey
+      companyId: contact.companyId
     }).then(_ => this.router.navigate(['/contact/all']));
   }
   

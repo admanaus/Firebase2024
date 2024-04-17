@@ -19,7 +19,7 @@ export class ContactService {
   getContactsObservable(companyId: string): Observable<Contact[]> {
     console.log('companyId', companyId);
     const filteredContacts = companyId != null ?
-      this.db.collection<Contact>('contacts', (ref: CollectionReference) => ref.where('companyKey', '==', companyId))
+      this.db.collection<Contact>('contacts', (ref: CollectionReference) => ref.where('companyId', '==', companyId))
       : this.contactsRef;
 
     return filteredContacts.snapshotChanges()
@@ -28,7 +28,7 @@ export class ContactService {
           return items.map((item: DocumentChangeAction<Contact>): Contact => {
             return {
               id: item.payload.doc.id,
-              companyKey: item.payload.doc.data().companyKey,
+              companyId: item.payload.doc.data().companyId,
               name: item.payload.doc.data().name,
               phone: item.payload.doc.data().phone
             };
