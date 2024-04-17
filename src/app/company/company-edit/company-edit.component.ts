@@ -34,19 +34,18 @@ export class CompanyEditComponent implements OnInit {
       name: company.name,
       phone: '123-456-7890',
       id: this.id,
-    });
-    this.router.navigate(['/company/all']);
+    }).then(_ => this.router.navigate(['/company/all']));
   }
 
   saveCompany(company: Company) {
     this.companyService.saveCompany({
       name: company.name,
-    });
-    this.router.navigate(['/company/all']);
+    }).then(_ => this.router.navigate(['/company/all']));
   }
   
   deleteCompany() {
-    this.companyService.deleteCompany();
+    this.companyService.deleteCompany(this.id)
+      .then(_ => this.router.navigate(['/company/all']));
   }
 
   getRandomId(): string {
