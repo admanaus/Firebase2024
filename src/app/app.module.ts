@@ -17,7 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
-
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -40,7 +40,8 @@ import { ContactListComponent } from './contact/contact-list/contact-list.compon
     MatInputModule,
     MatCardModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

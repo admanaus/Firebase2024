@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Contact } from '../models/contact';
 import { Observable, catchError, from, map, of, throwError } from 'rxjs';
-import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentChangeAction} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, CollectionReference, DocumentChangeAction} from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +16,19 @@ export class ContactService {
     this.contactsRef = this.db.collection<Contact>('contacts');
   }
 
-  getContactsObservable(): Observable<Contact[]> {
-    return this.contactsRef.snapshotChanges()
+  getContactsObservable(companyId: string): Observable<Contact[]> {
+    console.log('companyId', companyId);
+    const filteredContacts = companyId != null ?
+      this.db.collection<Contact>('contacts', (ref: CollectionReference) => ref.where('companyKey', '==', companyId))
+      : this.contactsRef;
+
+    return filteredContacts.snapshotChanges()
       .pipe(
         map((items: DocumentChangeAction<Contact>[]): Contact[] => {
           return items.map((item: DocumentChangeAction<Contact>): Contact => {
             return {
               id: item.payload.doc.id,
+              companyKey: item.payload.doc.data().companyKey,
               name: item.payload.doc.data().name,
               phone: item.payload.doc.data().phone
             };
@@ -31,6 +37,7 @@ export class ContactService {
         catchError(this.errorHandler)
       );
   }
+
 
   getContactObservable(id: string | null): Observable<Contact | undefined> {
     return this.db.doc<Contact>(`contacts/${id}`).valueChanges()

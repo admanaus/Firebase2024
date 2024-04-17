@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { EMPTY, Observable } from 'rxjs';
 import { Contact } from '../../models/contact';
+import { CompanyService } from '../../company/company.service';
 
 @Component({
   selector: 'app-contact-list',
@@ -11,17 +12,23 @@ import { Contact } from '../../models/contact';
 export class ContactListComponent implements OnInit {
 
   public contacts$: Observable<Contact[]>;
+  public companies$: Observable<Contact[]>;
 
-  constructor(private contactService: ContactService) {
+  constructor(
+    private contactService: ContactService,
+    private companyService: CompanyService
+  ) {
     this.contacts$ = EMPTY;
+    this.companies$ = companyService.getCompaniesObservable();
   }
 
   ngOnInit() {
     this.getContacts();
   }
 
-  getContacts() {
-    this.contacts$ = this.contactService.getContactsObservable();
+  getContacts(companyId: string = null) {
+    this.contacts$ = this.contactService.getContactsObservable(companyId);
+    this.contacts$.subscribe(contacts => console.log('contacts', contacts));
   }
 
 }

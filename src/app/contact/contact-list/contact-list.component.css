@@ -3,3 +3,11 @@ button[mat-fab] {
     bottom: 25px;
     right: 25px;
   }
+
+  .paddingBottom{
+    padding-bottom: 10px;
+  }
+
+  .paddingLeft{
+    padding-left: 10px;
+  }
