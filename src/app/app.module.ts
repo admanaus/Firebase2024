@@ -15,6 +15,8 @@ import {MatCardModule} from '@angular/material/card';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { ContactEditComponent } from './contact/contact-edit/contact-edit.component';
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
 
 
 
@@ -22,7 +24,9 @@ import {MatButtonModule} from '@angular/material/button';
   declarations: [
     AppComponent,
     CompanyEditComponent,
-    CompanyListComponent
+    CompanyListComponent,
+    ContactEditComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,
